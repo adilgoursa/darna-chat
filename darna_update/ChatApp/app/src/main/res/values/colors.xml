@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#4A6FE3</color>
+    <color name="primary_dark">#3457C4</color>
+    <color name="accent">#25D366</color>
+    <color name="background">#F5F6FA</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#1C1C1E</color>
+    <color name="gray_light">#E4E6EB</color>
+    <color name="gray_text">#8A8D91</color>
+    <color name="bubble_sent">#4A6FE3</color>
+    <color name="bubble_received">#E4E6EB</color>
+</resources>

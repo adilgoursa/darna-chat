@@ -1,0 +1,37 @@
+name: Build Release APK
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: "8.7"
+
+      # A "release" build (code shrinking/obfuscation, isDebuggable=false)
+      # signed with our own committed keystore — no Play Store account
+      # needed, but a cleaner build than "debug" that antivirus scanners
+      # are somewhat less likely to flag as a generic/dev artifact.
+      - name: Build release APK
+        run: gradle assembleRelease --no-daemon
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: darna-release-apk
+          path: app/build/outputs/apk/release/*.apk
